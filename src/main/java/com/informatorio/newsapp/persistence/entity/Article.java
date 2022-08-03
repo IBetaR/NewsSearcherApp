@@ -1,5 +1,6 @@
 package com.informatorio.newsapp.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public class Article {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -21,8 +22,22 @@ public class Article {
     private LocalDate publishedAt;
     private String content;
 
-    //private Author author;
-    //private Source source;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Author author;
 
+    public Author getAuthor() {
+        return author;
+    }
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Source source;
+
+    public Source getSource() {
+        return source;
+    }
+
+    public Article() {
+    }
 }

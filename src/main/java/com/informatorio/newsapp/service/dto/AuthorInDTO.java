@@ -9,4 +9,8 @@ public class AuthorInDTO {
     private String firstname;
     private String lastname;
     private LocalDate createdAt;
+
+    public String getFullname() {
+        return firstname+" "+lastname;
+    }
 }
